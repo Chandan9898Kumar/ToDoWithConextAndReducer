@@ -5,6 +5,7 @@ import Spinner from "./Spinner/Spinner";
 import HomePage from "./HomageAnimation/HomeAnimation";
 import TabsExample from './NavLink/NavLink'
 const ToDoAppOne=lazy(()=>import('./NormalTodoApp/NormalTodo'))
+const TodoAppNew =lazy(()=>import('./TodoAppSecond/TodoAppSecVersion'))
 
 function App() {
   return (
@@ -15,9 +16,7 @@ function App() {
           <Routes>
           <Route exact path='/' element={<HomePage />} />
           <Route exact path ='/normalTodoApp' element={<ToDoAppOne />}/>
-            
-
-
+          <Route exact path ='/normalTodoAppNew' element={<TodoAppNew />}/>
           </Routes>
         </BrowserRouter>
       </Suspense>

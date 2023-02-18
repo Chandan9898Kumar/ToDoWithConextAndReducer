@@ -20,6 +20,11 @@ function TabsExample() {
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/normalTodoAppNew">
+                ToDo second Version
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/TodoAppWithReducer">
                 ToDO With Reducer
               </a>
