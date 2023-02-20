@@ -25,7 +25,7 @@ function TabsExample() {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/TodoAppWithReducer">
+              <a class="nav-link" href="/TodoReducer">
                 ToDO With Reducer
               </a>
             </li>
