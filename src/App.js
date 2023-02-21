@@ -7,6 +7,7 @@ import TabsExample from './NavLink/NavLink'
 const ToDoAppOne=lazy(()=>import('./NormalTodoApp/NormalTodo'))
 const TodoAppNew =lazy(()=>import('./TodoAppSecond/TodoAppSecVersion'))
 const ToDoReducerApp = lazy(()=>import('./ToDoWithReducer/ReducerTodo'))
+const ContextTodo= lazy(()=>import('./TodoWithContext/TodoWithContext'))
 function App() {
   return (
     <div>
@@ -18,6 +19,7 @@ function App() {
           <Route exact path ='/normalTodoApp' element={<ToDoAppOne />}/>
           <Route exact path ='/normalTodoAppNew' element={<TodoAppNew />}/>
           <Route exact path ='/TodoReducer' element={<ToDoReducerApp />}/>
+          <Route exact path ='/TodoContext' element={<ContextTodo />}/>
           </Routes>
         </BrowserRouter>
       </Suspense>

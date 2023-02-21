@@ -1,4 +1,4 @@
-import React, { useReducer} from "react";
+import React, { useReducer } from "react";
 import reduce from "./ReduceFunction";
 import "./reducerStyles.css";
 import AddToDoTask from "./AddToDo";
@@ -38,19 +38,17 @@ const ToDoReducerApp = () => {
   };
 
   return (
-    (
-      <div className="headContainer">
-        <div className="childContainer">
-          <h1>ToDo With Reducer</h1>
-          <AddToDoTask handleAddTask={handleAddTask} />
-          <UpdateTodo
-            deleteItem={deleteItem}
-            editItem={editItem}
-            state={state}
-          />
-        </div>
+    <div className="headContainer">
+      <div className="childContainer">
+        <h1>ToDo With Reducer</h1>
+        <AddToDoTask handleAddTask={handleAddTask} />
+        <UpdateTodo deleteItem={deleteItem} editItem={editItem} state={state} />
       </div>
-    )
+    </div>
   );
 };
 export default ToDoReducerApp;
+
+// In above we had pass functions,state in these two component,but instead of that we can make it short by using contextApi.
+// and instead of passing these functions,we can do our work by simply using dispatch method in eventHandlers(using contextApi->
+// check next app--> TodoWithContext).
