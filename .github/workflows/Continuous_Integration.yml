@@ -1,11 +1,11 @@
-name: Continuous Integration Testing (CI)
+name: Continuous Integration (CI)
 
-run-name: ${{github.actor}} is testing out the GitHub Actions.
+run-name: ${{ github.actor }} is testing out GitHUb Actions.
 
 on:
   push:
     branches:
-      -feature/todoapp
+      - feature/todoapp
 
 jobs:
   build:
@@ -13,19 +13,17 @@ jobs:
 
     steps:
       - name: Checkout to the repository
-        uses: action/checkout@v2
-
-      - name:  Setup Node.js Environment
-        uses: action/setup-node@v2-beta
+        uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2-beta
         with:
           node-version: 14
+      - name: Install package dependencies
+        run: npm install
 
-      - name: Install Package Dependencies
-         run: npm install
-
-      - name: Check Code Linting
-         run: npm run lint 
-
+      - name: Check code linting
+        run: npm run lint
+        
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
         with:
