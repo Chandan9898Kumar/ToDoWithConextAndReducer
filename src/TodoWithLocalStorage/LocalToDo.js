@@ -1,28 +1,29 @@
-import React, { useState } from "react";
-import "./todoOneStyle.css";
+import React, { useState, useEffect } from "react";
+import "./localStyle.css";
 import Button from "react-bootstrap/Button";
-let details = [
-  {
-    id: 0,
-    subject: "SST",
-  },
-  {
-    id: 1,
-    subject: "DSA",
-  },
-  {
-    id: 2,
-    subject: "PT",
-  },
-];
 
-let zIndex=0
+// getting data from localStorage,now after adding whenever we refresh the page,our data will not erased.
+const getDataLocalStorage = () => {
+  let fetchedData = localStorage.getItem("storedData");
+  if (fetchedData && fetchedData.length) {
+    return JSON.parse(localStorage.getItem("storedData"));
+  } else {
+    return [];
+  }
+};
 
-const ToDoAppOne = () => {
-  const [allData, setAllData] = useState(details);
+const ToDoLocalStorage = () => {
+  const [allData, setAllData] = useState(getDataLocalStorage());
   const [textInput, setTextInput] = useState("");
   const [editCondition, setEditCondition] = useState(false);
   const [itemId, setItemId] = useState("");
+
+  //  by storing data like this,whenever allData got changes,our data get stored there but when we refresh the page all data got erased,
+  // so to handle it we will take a function getDataLocalStorage() to get data from localStorage as we insert anything in allData.
+  // and put it in useState.
+  useEffect(() => {
+    localStorage.setItem("storedData", JSON.stringify(allData));
+  }, [allData]);
 
   const handleClick = (event) => {
     event.preventDefault();
@@ -32,7 +33,7 @@ const ToDoAppOne = () => {
     setAllData([
       ...allData,
       {
-        id: zIndex++,
+        id: Date.now(),
         subject: textInput,
       },
     ]);
@@ -61,43 +62,16 @@ const ToDoAppOne = () => {
         }
       })
     );
-
-    //                                                OR
-    // setAllData(allData.map((item, index) =>item.id===value.id ? {...item,subject:event.target.value}:item));
-    
-    // Below we have taken {} curly braces,hence we have to use return,if we remove return then error will show.
-    // in above we have not use {} curly braces,hence we directly implemented
-
-    //                                                OR
-    // setAllData(allData.map((items)=> {
-    //     return  items.id===value.id ? {...items,subject:event.target.value}: items
-    //   }))
-
-    //                                                OR
-    // const newData = allData.map((items) => {
-    //     return items.id === value.id ? { ...items, subject: event.target.value } : items
-    // })
-    // setAllData(newData)
-
   };
 
   return (
     <div className="centerElement">
       <div className="mainComponent">
-        <div>
-          <label
-            style={{
-              marginRight: "70px",
-              marginTop: "5px",
-              marginBottom: "5px",
-              fontSize: "large",
-            }}
-          >
-            ToDo App
-          </label>
+        <div className="label">
+          <label>ToDo App With LocalStorage</label>
         </div>
 
-        <div>
+        <div className="handleInputButton">
           <input
             className="inputText"
             type="text"
@@ -105,39 +79,46 @@ const ToDoAppOne = () => {
             value={textInput}
             onChange={(event) => setTextInput(event.target.value)}
           />{" "}
-          <span>
-            <Button
-              variant="secondary"
-              type="submit"
-              onClick={(event) => handleClick(event)}
-            >
-              Add
-            </Button>{" "}
-          </span>
+          {"  "}
+          <Button
+            style={{ width: "100px" }}
+            variant="secondary"
+            type="submit"
+            onClick={(event) => handleClick(event)}
+          >
+            Add
+          </Button>{" "}
         </div>
-        <div>
+
+        <div className="setListItem">
           {allData &&
             allData.map((item, index) => {
               return (
-                <div key={index} className="propData">
+                <div key={index} className="">
                   <div style={{ display: "inline-flex" }}>
                     <div>
                       <span style={{ fontSize: "large", fontWeight: "bolder" }}>
                         Subject :{" "}
-                        {item && item.subject && item.subject.toUpperCase()}
+                        {item.id === itemId && editCondition
+                          ? ""
+                          : item.subject.toUpperCase()}{" "}
                       </span>
-                      {"  "}
                     </div>
-                    <div>
+
+                    <div className="setEditAndDeleteButton">
                       {item.id === itemId && editCondition && (
                         <input
+                          className="editInputText"
                           type="text"
                           placeholder="Edit Item ..."
                           value={item.subject}
                           onChange={(event) => changeItem(event, item)}
                         />
                       )}
+                      {"  "}
+                      {"  "}
                       <Button
+                        style={{ width: "100px" }}
                         variant="secondary"
                         type="submit"
                         onClick={(event) => editItem(event, item.id)}
@@ -145,6 +126,7 @@ const ToDoAppOne = () => {
                         {item.id === itemId && editCondition ? "Save" : "Edit"}
                       </Button>{" "}
                       <Button
+                        style={{ width: "100px" }}
                         variant="secondary"
                         type="submit"
                         onClick={(event) => deleteItem(event, item.id)}
@@ -153,6 +135,8 @@ const ToDoAppOne = () => {
                       </Button>{" "}
                     </div>
                   </div>
+                  <br />
+                  <br />
                 </div>
               );
             })}
@@ -161,4 +145,4 @@ const ToDoAppOne = () => {
     </div>
   );
 };
-export default ToDoAppOne;
+export default ToDoLocalStorage;

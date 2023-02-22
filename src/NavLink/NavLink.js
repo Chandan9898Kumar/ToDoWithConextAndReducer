@@ -35,7 +35,7 @@ function TabsExample() {
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/TodoAppWithStorage">
+              <a class="nav-link" href="/TodoLocal">
                 ToDO With LocalStorage
               </a>
             </li>
@@ -51,5 +51,4 @@ function TabsExample() {
     </nav>
   );
 }
-
 export default TabsExample;

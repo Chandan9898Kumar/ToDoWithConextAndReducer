@@ -1,0 +1,33 @@
+name: Continuous Integration Testing (CI)
+
+run-name: ${{github.actor}} is testing out the GitHub Actions.
+
+on:
+  push:
+    branches:
+      -feature/todoapp
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout to the repository
+        uses: action/checkout@v2
+
+      - name:  Setup Node.js Environment
+        uses: action/setup-node@v2-beta
+        with:
+          node-version: 14
+
+      - name: Install Package Dependencies
+         run: npm install
+
+      - name: Check Code Linting
+         run: npm run lint 
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: output/test/code-coverage.html
