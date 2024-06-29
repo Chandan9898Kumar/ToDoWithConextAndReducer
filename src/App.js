@@ -8,6 +8,7 @@ const TodoAppNew = lazy(() => import("./TodoAppSecond/TodoAppSecVersion"));
 const ToDoReducerApp = lazy(() => import("./ToDoWithReducer/ReducerTodo"));
 const ContextTodo = lazy(() => import("./TodoWithContext/TodoWithContext"));
 const ToDoLocalStorage = lazy(()=>import("./TodoWithLocalStorage/LocalToDo"));
+
 function App() {
   return (
     <div>
